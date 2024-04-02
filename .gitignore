@@ -3,6 +3,10 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 
+# Ignore SonarLint files
+.sonarlint/
+.idea/sonarlint/
+
 ### Eclipse ###
 .apt_generated
 .classpath

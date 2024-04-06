@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import service.CSVHandler;
+import service.ConsumerCSVFunction;
 
 public class Inventory {
   private List<Product> products;
@@ -25,12 +26,12 @@ public class Inventory {
     return products;
   }
 
-  public void consumeCSV(String fileName) {
-    this.products = CSVHandler.readCSV(fileName).getProducts();
+  public void consumeCSV(String fileName, ConsumerCSVFunction consumer) {
+    consumer.accept(fileName, this);
   }
 
   public void generateCSV(String fileName) {
-    CSVHandler.writeCSV(this.products, fileName);
+    CSVHandler.generateCSV(this.products, fileName);
   }
 
   public List<Product> listAndSortProducts(String sortBy) {

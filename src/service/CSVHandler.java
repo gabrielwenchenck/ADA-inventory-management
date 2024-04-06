@@ -4,6 +4,7 @@ import entities.Inventory;
 import entities.Product;
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -50,8 +51,7 @@ public class CSVHandler {
                       Integer.parseInt(product[1]),
                       Double.parseDouble(product[2]),
                       product[3],
-                      DATE_FORMAT.parse(product[4]),
-                      DATE_FORMAT.parse(product[5]));
+                      DATE_FORMAT.parse(product[4]));
                 } catch (ParseException e) {
                   throw new RuntimeException(e);
                 }
@@ -63,5 +63,18 @@ public class CSVHandler {
     }
 
     return inventory;
+  }
+
+  public static void generateCSV(List<Product> products, String fileName) {
+    Path path = Paths.get(fileName);
+    try {
+      Files.write(path, "Name,Quantity,Price,Category,CreationDate,UpdateDate\n".getBytes());
+      for (Product product : products) {
+        String line = String.join(",", product.getName(), String.valueOf(product.getQuantity()), String.valueOf(product.getPrice()), product.getCategory(), DATE_FORMAT.format(product.getCreationDate()), DATE_FORMAT.format(product.getUpdateDate())) + "\n";
+        Files.write(path, line.getBytes(), java.nio.file.StandardOpenOption.APPEND);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }

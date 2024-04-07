@@ -11,18 +11,19 @@ public class Product {
   private Date updateDate;
 
   public Product(
-      String name,
-      int quantity,
-      double price,
-      String category,
-      Date creationDate,
-      Date updateDate) {
+          String name,
+          int quantity,
+          double price,
+          String category, Date creationDate, Date updateDate) {
     this.name = name;
     this.quantity = quantity;
     this.price = price;
     this.category = category;
     this.creationDate = creationDate;
     this.updateDate = updateDate;
+  }
+
+  public Product(String name, int quantity, double price, String category, Date parse) {
   }
 
   public String getName() {

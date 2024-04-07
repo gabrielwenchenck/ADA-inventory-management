@@ -2,6 +2,9 @@ package application;
 
 import entities.Inventory;
 import entities.Product;
+import service.CSVConsumer;
+import service.ConsumerCSVFunction;
+
 import java.util.List;
 
 public class Main {
@@ -9,7 +12,8 @@ public class Main {
 
     Inventory inventory = new Inventory();
 
-    inventory.consumeCSV("input.csv");
+    ConsumerCSVFunction csvConsumer = new CSVConsumer();
+    inventory.consumeCSV("input.csv", csvConsumer);
 
     List<Product> sortedProducts = inventory.listAndSortProducts("name");
     sortedProducts.forEach(

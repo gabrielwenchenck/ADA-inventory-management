@@ -6,7 +6,6 @@ import entities.Product;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Date;
 
 public class CSVConsumer implements ConsumerCSVFunction {
     @Override
@@ -24,13 +23,10 @@ public class CSVConsumer implements ConsumerCSVFunction {
                 int quantity = Integer.parseInt(data[1]);
                 double price = Double.parseDouble(data[2]);
                 String category = data[3];
-                Date creationDate = new Date();
-                Date updateDate = new Date();
-                inventory.addProduct(new Product(name, quantity, price, category, creationDate, updateDate));
+                inventory.addProduct(new Product(name, quantity, price, category));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 }
-

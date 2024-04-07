@@ -26,6 +26,15 @@ public class Product {
   public Product(String name, int quantity, double price, String category, Date parse) {
   }
 
+  public Product(String name, int quantity, double price, String category) {
+    this.name = name;
+    this.quantity = quantity;
+    this.price = price;
+    this.category = category;
+    this.creationDate = new Date();
+    this.updateDate = null;
+  }
+
   public String getName() {
     return name;
   }

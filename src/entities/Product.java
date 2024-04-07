@@ -73,4 +73,14 @@ public class Product {
   public void setUpdateDate(Date updateDate) {
     this.updateDate = updateDate;
   }
+
+  @Override
+  public String toString() {
+    return "name='" + name + '\'' +
+            ", quantity=" + quantity +
+            ", price=" + price +
+            ", category='" + category + '\'' +
+            ", creationDate=" + creationDate +
+            ", updateDate=" + updateDate;
+  }
 }

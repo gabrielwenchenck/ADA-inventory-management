@@ -3,6 +3,7 @@ package entities;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import service.CSVHandler;
 import service.ConsumerCSVFunction;
@@ -24,6 +25,14 @@ public class Inventory {
 
   public List<Product> getProducts() {
     return products;
+  }
+
+  public Product getProductByName(String name) {
+    Optional<Product> product = products.stream()
+            .filter(p -> p.getName().equals(name))
+            .findFirst();
+
+    return product.orElse(null);
   }
 
   public void consumeCSV(String fileName, ConsumerCSVFunction consumer) {

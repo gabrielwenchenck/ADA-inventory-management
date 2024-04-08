@@ -109,7 +109,11 @@ public class InventoryManager {
         try {
             System.out.println("Products: ");
             List<Product> productList = inventory.getProducts();
-            productList.forEach(System.out::println);
+            System.out.printf("%-20s %-10s %-10s %-20s %-20s %-20s%n", "Name", "Quantity", "Price", "Category", "Creation Date", "Update Date");
+            for (Product product : productList) {
+                System.out.printf("%-20s %-10d %-10.2f %-20s %-20s %-20s%n", product.getName(), product.getQuantity(),
+                        product.getPrice(), product.getCategory(), product.getCreationDate(), product.getUpdateDate());
+            }
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }

@@ -16,7 +16,11 @@ public class Inventory {
   }
 
   public void addProduct(Product product) {
-    this.products.add(product);
+    if (product != null) {
+      this.products.add(product);
+    } else {
+      throw new IllegalArgumentException("produto não deve ser nulo.");
+    }
   }
 
   public void removeProduct(Product product) {

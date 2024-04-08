@@ -23,15 +23,16 @@ public class Product {
     this.updateDate = updateDate;
   }
 
-  public Product(String name, int quantity, double price, String category, Date parse) {
+  public Product(String name, int quantity, double price, String category) {
+    this(name, quantity, price, category, new Date(), null);
   }
 
-  public Product(String name, int quantity, double price, String category) {
+  public Product(String name, int quantity, double price, String category, Date creationDate) {
     this.name = name;
     this.quantity = quantity;
     this.price = price;
     this.category = category;
-    this.creationDate = new Date();
+    this.creationDate = creationDate;
     this.updateDate = null;
   }
 

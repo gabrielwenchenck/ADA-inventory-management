@@ -10,47 +10,28 @@ import java.util.Scanner;
 
 public class InventoryManager {
     private Inventory inventory;
+    private final Scanner sc;
 
     public InventoryManager(Inventory inventory) {
         this.inventory = inventory;
+        this.sc = ScannerSingleton.getScanner();
     }
 
     public void addProduct() {
         try {
-            Scanner sc = ScannerSingleton.getScanner();
-
             System.out.print("Insert product name: ");
             String name = sc.nextLine();
 
-            int quantity;
             System.out.print("Insert the product quantity: ");
-            while (true) {
-                System.out.print("Insert the product quantity: ");
-                try {
-                    quantity = Integer.parseInt(sc.nextLine());
-                    break;
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid input format for quantity. Please enter a valid integer.");
-                }
-            }
+            int quantity = validateInputInteger();
 
-            double price;
             System.out.print("Insert the product price: ");
-            while (true) {
-                System.out.print("Insert the product price: ");
-                try {
-                    price = Double.parseDouble(sc.nextLine());
-                    break; // Saia do loop se a entrada for válida
-                } catch (NumberFormatException e) {
-                    System.out.println("Invalid input format for price. Please enter a valid number.");
-                }
-            }
+            double price = validateInputDouble();
 
             System.out.print("Insert the product category: ");
             String category = sc.nextLine();
 
             Date date = new Date();
-
             Product product = new Product(name, quantity, price, category, date, date);
             inventory.addProduct(product);
 
@@ -62,7 +43,6 @@ public class InventoryManager {
 
     public void removeProduct() {
         try {
-            Scanner sc = ScannerSingleton.getScanner();
             System.out.print("Insert product name: ");
             String name = sc.nextLine();
 
@@ -82,7 +62,6 @@ public class InventoryManager {
 
     public void editProduct() {
         try {
-            Scanner sc = ScannerSingleton.getScanner();
             System.out.print("Insert product name: ");
             String name = sc.nextLine();
 
@@ -97,12 +76,10 @@ public class InventoryManager {
             String newName = sc.nextLine();
 
             System.out.print("Insert the product's new quantity: ");
-            int newQuantity = sc.nextInt();
-            sc.nextLine();
+            int newQuantity = validateInputInteger();
 
             System.out.print("Insert the product's new price: ");
-            double newPrice = sc.nextDouble();
-            sc.nextLine();
+            double newPrice = validateInputDouble();
 
             System.out.print("Insert the product's new category: ");
             String newCategory = sc.nextLine();
@@ -150,5 +127,25 @@ public class InventoryManager {
 
     public void loadInventoryFromCSV(ConsumerCSVFunction csvConsumer) {
         inventory.consumeCSV("input.csv", csvConsumer);
+    }
+
+    private int validateInputInteger() {
+        while (true) {
+            try {
+                return Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input format. Please enter a valid integer.");
+            }
+        }
+    }
+
+    private double validateInputDouble() {
+        while (true) {
+            try {
+                return Double.parseDouble(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input format. Please enter a valid number.");
+            }
+        }
     }
 }

@@ -1,16 +1,16 @@
 package application;
 
 import entities.Inventory;
-import entities.Product;
 import service.CSVConsumer;
 import service.ConsumerCSVFunction;
 import service.InventoryManager;
 import utils.ScannerSingleton;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+  private static final int OPTION_EXIT = 6;
+
   public static void main(String[] args) {
     Scanner sc = ScannerSingleton.getScanner();
     InventoryManager inventoryManager = new InventoryManager(new Inventory());
@@ -22,8 +22,7 @@ public class Main {
     Menu.welcomeMessage();
     do {
       Menu.options();
-      option = sc.nextInt();
-      sc.nextLine();
+      option = getUserOptions(sc);
       Menu.clearConsole();
 
       switch (option) {
@@ -42,7 +41,7 @@ public class Main {
         case 5:
           inventoryManager.exportToCSV();
           break;
-        case 6:
+        case OPTION_EXIT:
           Menu.exitMessage();
           break;
         default:
@@ -53,5 +52,15 @@ public class Main {
     } while (option != 6);
 
     ScannerSingleton.closeScanner();
+  }
+
+  private static int getUserOptions(Scanner scanner) {
+    if (scanner.hasNextInt()) {
+      return scanner.nextInt();
+    } else {
+      Menu.invalidOptionMessage();
+      scanner.next();
+      return -1;
+    }
   }
 }

@@ -19,7 +19,7 @@ public class Inventory {
     if (product != null) {
       this.products.add(product);
     } else {
-      throw new IllegalArgumentException("produto não deve ser nulo.");
+      throw new IllegalArgumentException("Product can't be null.");
     }
   }
 

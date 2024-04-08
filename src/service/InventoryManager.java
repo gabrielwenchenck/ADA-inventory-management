@@ -22,13 +22,29 @@ public class InventoryManager {
             System.out.print("Insert product name: ");
             String name = sc.nextLine();
 
+            int quantity;
             System.out.print("Insert the product quantity: ");
-            int quantity = sc.nextInt();
-            sc.nextLine();
+            while (true) {
+                System.out.print("Insert the product quantity: ");
+                try {
+                    quantity = Integer.parseInt(sc.nextLine());
+                    break;
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input format for quantity. Please enter a valid integer.");
+                }
+            }
 
+            double price;
             System.out.print("Insert the product price: ");
-            double price = sc.nextDouble();
-            sc.nextLine();
+            while (true) {
+                System.out.print("Insert the product price: ");
+                try {
+                    price = Double.parseDouble(sc.nextLine());
+                    break; // Saia do loop se a entrada for válida
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input format for price. Please enter a valid number.");
+                }
+            }
 
             System.out.print("Insert the product category: ");
             String category = sc.nextLine();
@@ -122,6 +138,9 @@ public class InventoryManager {
     public void exportToCSV() {
         try {
             List<Product> sortedProducts = inventory.listAndSortProducts("name");
+            for (Product product : sortedProducts) {
+                product.setUpdateDate(new Date());
+            }
             inventory.generateCSV("output.csv");
             System.out.println("output.csv generated successfully.");
         } catch (Exception e) {

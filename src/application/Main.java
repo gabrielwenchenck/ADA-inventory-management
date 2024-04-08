@@ -56,7 +56,9 @@ public class Main {
 
   private static int getUserOptions(Scanner scanner) {
     if (scanner.hasNextInt()) {
-      return scanner.nextInt();
+      int option = scanner.nextInt();
+      scanner.nextLine();
+      return option;
     } else {
       Menu.invalidOptionMessage();
       scanner.next();

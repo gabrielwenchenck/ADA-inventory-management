@@ -63,6 +63,7 @@ public class InventoryManager {
 
     public void editProduct() {
         try {
+            sc.nextLine();
             System.out.print("Insert product name: ");
             String name = sc.nextLine();
 
